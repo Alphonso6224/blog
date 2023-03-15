@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Article;
+use App\Models\User;
+use App\Models\Comment;
+
 use Illuminate\Http\Request;
 
 class ArticlesController extends Controller
@@ -9,13 +13,19 @@ class ArticlesController extends Controller
     //
     public function index()
     {
-        $articles = [
-            ['title' => 'titre article 1', 'body' => 'Contenu de l\'article 1'],
-            ['title' => 'titre article 2', 'body' => 'Contenu de l\'article 2'],
-            ['title' => 'titre article 3', 'body' => 'Contenu de l\'article 3'],
-        ];
-
+        $articles = Article::with('user')->orderBy('created_at', 'desc')->get();
         
-        return view('layouts.articles', compact('articles'));
+        return view('articles.articles', compact('articles'));
+    }
+
+    public function show($id)
+    {
+        $article = Article::with('user')->with(['comments' => function ($query) {
+            $query->with('user');
+        }])->findOrFail($id);
+        // dd($article);
+        // ddd($article);
+
+        return view('articles.show', compact('article'));
     }
 }

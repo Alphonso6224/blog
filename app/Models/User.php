@@ -55,4 +55,9 @@ class User extends Authenticatable
     { // Un utilisateur peut écrire plusieurs commentaires
         return $this->hasMany(Comments::class);
     }
+
+    public function profile()
+    { // Un utilisateurs ne peut avoir qu'un profil
+        return $this->hasOne(Profile::class);
+    }
 }
