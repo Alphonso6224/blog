@@ -22,6 +22,11 @@ class Article extends Model
         return $this->user->name;
     }
 
+    public function getCommentsAttribute()
+    {
+        return $this->comments()->with('user')->get();
+    }
+
     public function user()
     { // Un article n'a qu'un auteur
         return $this->belongsTo(User::class);

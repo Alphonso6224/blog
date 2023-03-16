@@ -18,14 +18,13 @@ class ArticlesController extends Controller
         return view('articles.articles', compact('articles'));
     }
 
-    public function show($id)
+    public function show(Article $article)
     {
-        $article = Article::with('user')->with(['comments' => function ($query) {
-            $query->with('user');
-        }])->findOrFail($id);
+        // $article = Article::with(['comments' => function ($query) {
+        //     $query->with('user');
+        // }])->findOrFail($id);
         // dd($article);
-        // ddd($article);
-
+        // // ddd($article);
         return view('articles.show', compact('article'));
     }
 }
