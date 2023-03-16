@@ -14,7 +14,7 @@ class Article extends Model
     // Ajout
     protected $fillable = ['title', 'body', 'user_id', 'image'];
     protected $appends = [
-        'author'
+        'author', 'comments'
     ];
 
     public function getAuthorAttribute()
@@ -23,13 +23,13 @@ class Article extends Model
     }
 
     public function user()
-    { // bUn article n'a qu'un auteur
+    { // Un article n'a qu'un auteur
         return $this->belongsTo(User::class);
     }
 
     public function comments()
     { // Un article peut avoir plusieurs commentaires
-        return $this->hasMany(User::class);
+        return $this->hasMany(Comment::class);
     }
 
     public function getRouteKeyName()

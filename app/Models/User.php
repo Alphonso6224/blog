@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Article;
 use App\Models\Comment;
+use App\Models\Profile;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
